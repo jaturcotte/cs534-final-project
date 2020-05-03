@@ -1,9 +1,12 @@
 import { GuessResult } from "./GuessResult";
 
 export type JottoAgent = {
-  /** try to guess the opponent's word */
-  guess(word: string): GuessResult;
+  /** get the next word being guessed */
+  getGuess(): string;
 
-  /** set your own secret word */
-  setSecretWord(word: string): void;
+  /** process the results of a guess */
+  processResults(gr: GuessResult): void;
+
+  /** returns the agent's secret word */
+  getSecretWord(): string;
 };
