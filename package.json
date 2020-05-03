@@ -1,0 +1,34 @@
+{
+  "name": "cs534-final-project",
+  "version": "1.0.0",
+  "description": "Creating an agent that plays the game Jotto",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint 'src/**/*' --ext .js,.ts --quiet --fix",
+    "test": "mocha -r ts-node/register test/**/*.test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaturcotte/cs534-final-project.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaturcotte/cs534-final-project/issues"
+  },
+  "homepage": "https://github.com/jaturcotte/cs534-final-project#readme",
+  "devDependencies": {
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.13.4",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "mocha": "^7.1.2",
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.8.3"
+  }
+}
