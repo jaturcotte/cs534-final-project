@@ -16,7 +16,7 @@ export class Jotto {
   public constructor(p1: JottoAgent, p2: JottoAgent) {
     this.p1 = p1;
     this.p2 = p2;
-    this.dictionaryManager = new DictionaryManager;
+    this.dictionaryManager = new DictionaryManager();
     this.dictionaryManager.addWordsFromFile(WORD_BANK_PATH).then(() => {
       this.ready = true;
     });

@@ -4,7 +4,7 @@ import { createInterface } from "readline";
 export class DictionaryManager {
   private dict: { [key: string]: boolean };
 
-  constructor() {
+  public constructor() {
     this.dict = {};
   }
 
@@ -23,7 +23,7 @@ export class DictionaryManager {
     return Object.keys(this.dict).length;
   }
 
-  public clear() {
+  public clear(): void {
     this.dict = {};
   }
 

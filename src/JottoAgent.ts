@@ -1,6 +1,6 @@
 import { GuessResult } from "./GuessResult";
 
-export type JottoAgent = {
+export interface JottoAgent {
   /** get the next word being guessed */
   getGuess(): string;
 
@@ -9,4 +9,4 @@ export type JottoAgent = {
 
   /** returns the agent's secret word */
   getSecretWord(): string;
-};
+}

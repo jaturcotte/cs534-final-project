@@ -1,8 +1,7 @@
-import { JottoAgent } from "./JottoAgent";
-import { DictionaryManager } from "./DictionaryManager";
 import { readFileSync } from "fs";
+import { GuessResult } from "./GuessResult";
+import { JottoAgent } from "./JottoAgent";
 import { WORD_BANK_PATH } from "./main";
-import { GuessResult } from './GuessResult';
 
 /** a Jotto agent that makes random guesses, as a baseline */
 export class RandomAgent implements JottoAgent {
@@ -17,13 +16,13 @@ export class RandomAgent implements JottoAgent {
     this.secretWord = this.pickRandomWord();
   }
 
-  processResults(gr: GuessResult): void {
+  public processResults(gr: GuessResult): void {
     if (!gr.won()) {
       // we only care about the results if we won
       return;
     }
   }
-  
+
   private pickRandomWord(): string {
     return this.words[Math.floor(Math.random() * this.words.length)];
   }

@@ -19,7 +19,7 @@ export class GuessResult {
   }
 
   /** returns the word that was guessed */
-  getWord(): string {
+  public getWord(): string {
     return this.word;
   }
 
