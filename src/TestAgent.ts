@@ -3,9 +3,11 @@ import { JottoAgent } from "./JottoAgent";
 /** agent that always picks the same secret word and guess, for testing */
 export class TestAgent implements JottoAgent {
   private secretWord: string;
+  private guessWord: string;
 
-  public constructor() {
-    this.secretWord = "abets";
+  public constructor(secretWord = "abets", guessWord = "abhor") {
+    this.secretWord = secretWord;
+    this.guessWord = guessWord;
   }
 
   public setUp(): Promise<string> {
@@ -17,7 +19,7 @@ export class TestAgent implements JottoAgent {
   }
 
   public getGuess(): Promise<string> {
-    return new Promise((resolve) => resolve("abhor"));
+    return new Promise((resolve) => resolve(this.guessWord));
   }
 
   public getSecretWord(): string {
