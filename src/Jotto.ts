@@ -64,6 +64,8 @@ export class Jotto {
     secret: string
   ): Promise<GuessResult> {
     const guess = await activePlayer.getGuess();
+    const playerName = activePlayer === this.p1 ? "p1" : "p2";
+    console.log(playerName + " guesses '" + guess + "'");
     if (!this.dictionaryManager.validate(guess)) {
       throw new Error("Illegal word '" + guess + "'");
     }
