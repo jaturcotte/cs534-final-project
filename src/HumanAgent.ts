@@ -20,7 +20,7 @@ export class HumanAgent implements JottoAgent {
       this.dm.addWordsFromFile(WORD_BANK_PATH).then(() => {
         console.log("Enter a 5 letter isogram as your secret word: ");
         const getInput = (data: Buffer): void => {
-          const w = data.toString().replace(/\n/, "");
+          const w = data.toString().trim();
           if (this.dm.validate(w)) {
             this.secretWord = w;
             resolve(w);
@@ -40,7 +40,7 @@ export class HumanAgent implements JottoAgent {
     return new Promise((resolve) => {
       console.log("\nEnter your guess of the opponent's word: ");
       const getInput = (data: Buffer): void => {
-        const w = data.toString().replace(/\n/, "");
+        const w = data.toString().trim();
         if (this.dm.validate(w)) {
           resolve(w);
         } else {
@@ -61,7 +61,7 @@ export class HumanAgent implements JottoAgent {
       console.log(
         `The word "${gr.getWord()}" shares ${gr.correctLetters()} letter` +
           (gr.correctLetters() !== 1 ? "s" : "") +
-          ` with your opponent's secret word`
+          " with your opponent's secret word"
       );
     }
   }
