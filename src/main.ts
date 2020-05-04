@@ -15,7 +15,7 @@ export const WORD_BANK_PATH = join(__dirname, "../wordbank.txt");
     })
     .then((val) => {
       if (val.winner === null) {
-        console.log("Game ended without a winner after 1000 turns")
+        console.log("Game ended without a winner after 1000 turns");
       } else if (val.winner === p1) {
         console.log("P1 wins after " + val.turns + " turns");
       } else {

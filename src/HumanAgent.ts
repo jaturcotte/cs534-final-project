@@ -59,8 +59,9 @@ export class HumanAgent implements JottoAgent {
       console.log("That's right, you win!");
     } else {
       console.log(
-        `The word "${gr.getWord()}" shares ${gr.correctLetters()} letters ` +
-          `with your opponent's secret word`
+        `The word "${gr.getWord()}" shares ${gr.correctLetters()} letter` +
+          (gr.correctLetters() !== 1 ? "s" : "") +
+          ` with your opponent's secret word`
       );
     }
   }
