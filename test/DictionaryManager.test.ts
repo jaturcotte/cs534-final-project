@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { describe, it } from "mocha";
-import { WORD_BANK_PATH } from '../src/main';
+import { WORD_BANK_PATH } from "../src/main";
 import { DictionaryManager } from "../src/DictionaryManager";
 
 let dm: DictionaryManager;
@@ -8,11 +8,11 @@ let dm: DictionaryManager;
 describe("DictionaryManager", function () {
   before(async function () {
     dm = new DictionaryManager();
-    await dm.addWordsFromFile(WORD_BANK_PATH)
+    await dm.addWordsFromFile(WORD_BANK_PATH);
   });
 
   describe("addWordsFromFile()", function () {
-    it("should build the dictionary without error", function(done) {
+    it("should build the dictionary without error", function (done) {
       const dictMan = new DictionaryManager();
       dictMan.addWordsFromFile(WORD_BANK_PATH).then(done);
     });
