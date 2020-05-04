@@ -19,7 +19,7 @@ export class RandomAgent implements JottoAgent {
         if (err) throw err;
         this.words = data
           .toString()
-          .split("\n")
+          .split(/\s+/g)
           .filter((x) => x.length === 5);
         this.secretWord = this.pickRandomWord();
         resolve(this.secretWord);
