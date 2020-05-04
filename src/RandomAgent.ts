@@ -27,8 +27,8 @@ export class RandomAgent implements JottoAgent {
     return this.words[Math.floor(Math.random() * this.words.length)];
   }
 
-  public getGuess(): string {
-    return this.pickRandomWord();
+  public getGuess(): Promise<string> {
+    return new Promise((resolve) => resolve(this.pickRandomWord()));
   }
 
   public getSecretWord(): string {

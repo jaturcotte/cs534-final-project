@@ -2,7 +2,7 @@ import { GuessResult } from "./GuessResult";
 
 export interface JottoAgent {
   /** get the next word being guessed */
-  getGuess(): string;
+  getGuess(): Promise<string>;
 
   /** process the results of a guess */
   processResults(gr: GuessResult): void;
