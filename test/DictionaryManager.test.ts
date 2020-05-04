@@ -1,7 +1,6 @@
 import * as assert from "assert";
 import { describe, it } from "mocha";
 import { WORD_BANK_PATH } from '../src/main';
-import { RandomAgent } from "../src/RandomAgent";
 import { DictionaryManager } from "../src/DictionaryManager";
 
 let dm: DictionaryManager;

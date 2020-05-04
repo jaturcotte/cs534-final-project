@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFile } from "fs";
 import { GuessResult } from "./GuessResult";
 import { JottoAgent } from "./JottoAgent";
 import { WORD_BANK_PATH } from "./main";
@@ -9,11 +9,22 @@ export class RandomAgent implements JottoAgent {
   private words: string[];
 
   public constructor() {
-    this.words = readFileSync(WORD_BANK_PATH)
-      .toString()
-      .split("\n")
-      .filter((x) => x.length == 5);
-    this.secretWord = this.pickRandomWord();
+    this.secretWord = "";
+    this.words = [];
+  }
+
+  public setUp(): Promise<string> {
+    return new Promise((resolve) => {
+      readFile(WORD_BANK_PATH, (err, data) => {
+        if (err) throw err;
+        this.words = data
+          .toString()
+          .split("\n")
+          .filter((x) => x.length === 5);
+        this.secretWord = this.pickRandomWord();
+        resolve(this.secretWord);
+      });
+    });
   }
 
   public processResults(gr: GuessResult): void {
@@ -29,9 +40,5 @@ export class RandomAgent implements JottoAgent {
 
   public getGuess(): Promise<string> {
     return new Promise((resolve) => resolve(this.pickRandomWord()));
-  }
-
-  public getSecretWord(): string {
-    return this.secretWord;
   }
 }

@@ -1,7 +1,27 @@
 import { join } from "path";
+import { HumanAgent } from "./HumanAgent";
+import { Jotto } from "./Jotto";
+import { TestAgent } from "./TestAgent";
 
 export const WORD_BANK_PATH = join(__dirname, "../wordbank.txt");
 
 (function main(): void {
-  console.log("TODO: implement");
+  const p1 = new HumanAgent();
+  const p2 = new TestAgent();
+  const j = new Jotto(p1, p2);
+  j.setUp()
+    .then(() => {
+      return j.startGame();
+    })
+    .then((val) => {
+      if (val.winner === p1) {
+        console.log("P1 wins after " + val.turns + " turns");
+      } else {
+        console.log("P2 wins after " + val.turns + " turns");
+      }
+      process.exit(0);
+    })
+    .catch((reason) => {
+      console.error(reason);
+    });
 })();
