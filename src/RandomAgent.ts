@@ -1,7 +1,7 @@
 import { readFile } from "fs";
 import { GuessResult } from "./GuessResult";
 import { JottoAgent } from "./JottoAgent";
-import { WORD_BANK_PATH } from "./main";
+import { WORD_BANK_PATH } from "./constants";
 
 /** a Jotto agent that makes random guesses, as a baseline */
 export class RandomAgent implements JottoAgent {
@@ -20,7 +20,7 @@ export class RandomAgent implements JottoAgent {
         this.words = data
           .toString()
           .split(/\s+/g)
-          .filter((x) => x.length === 5);
+          .filter((x) => x.length !== 0);
         this.secretWord = this.pickRandomWord();
         resolve(this.secretWord);
       });

@@ -1,7 +1,7 @@
 import { JottoAgent } from "./JottoAgent";
 import { GuessResult } from "./GuessResult";
 import { DictionaryManager } from "./DictionaryManager";
-import { WORD_BANK_PATH } from "./main";
+import { WORD_BANK_PATH } from "./constants";
 
 export class HumanAgent implements JottoAgent {
   private stdin: NodeJS.ReadStream;

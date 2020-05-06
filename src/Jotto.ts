@@ -1,6 +1,6 @@
 import { JottoAgent } from "./JottoAgent";
 import { DictionaryManager } from "./DictionaryManager";
-import { WORD_BANK_PATH } from "./main";
+import { WORD_BANK_PATH } from "./constants";
 import { GuessResult } from "./GuessResult";
 
 /** This class manages the rules for a game of Jotto */
@@ -71,10 +71,10 @@ export class Jotto {
     }
     if (guess === secret) return new GuessResult(guess, true, 5);
 
-    let numCorrect = 0;
-    for (const s of guess) {
-      if (s !== undefined && secret.includes(s)) numCorrect++;
-    }
-    return new GuessResult(guess, false, numCorrect);
+    return new GuessResult(
+      guess,
+      false,
+      DictionaryManager.sharedLetters(secret, guess)
+    );
   }
 }
