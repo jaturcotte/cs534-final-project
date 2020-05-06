@@ -1,14 +1,14 @@
 import { readFile } from "fs";
 import { GuessResult } from "./GuessResult";
 import { JottoAgent } from "./JottoAgent";
-import { WORD_BANK_PATH } from "./main";
+import { WORD_BANK_PATH } from "./constants";
 import { DictionaryManager } from "./DictionaryManager";
 
-/** a Jotto agent that makes random guesses, as a baseline */
+/** a Jotto agent that implements a greedy algorithm */
 export class GreedyAgent implements JottoAgent {
   private secretWord: string;
   private words: string[];
-  private h: number[]; //probability word is selected from dictionary
+  private h: number[]; // probability word is selected from dictionary
   private flag: boolean;
   private L: number;
 
@@ -27,7 +27,7 @@ export class GreedyAgent implements JottoAgent {
         this.words = data
           .toString()
           .split(/\s+/g)
-          .filter((x) => x.length === 5);
+          .filter((x) => x.length !== 0);
         this.secretWord = this.pickRandomWord();
         this.h = new Array(this.words.length).fill(1 / this.words.length);
         resolve(this.secretWord);
@@ -37,11 +37,21 @@ export class GreedyAgent implements JottoAgent {
 
   public processResults(gr: GuessResult): void {
     if (!gr.won()) {
-      if(gr.correctLetters() === 0) {
-        this.words = this.words.filter(function(w:string) {return DictionaryManager.NumCommLetts(gr.getWord(), w) === 0});
-      }
-      else {
-        this.words = this.words.filter(function(w:string) {return DictionaryManager.NumCommLetts(gr.getWord(), w) >= gr.correctLetters()});
+      if (gr.correctLetters() === 0) {
+        this.words = this.words.filter(function (w: string) {
+          return (
+            w !== gr.getWord() &&
+            DictionaryManager.sharedLetters(gr.getWord(), w) === 0
+          );
+        });
+      } else {
+        this.words = this.words.filter(function (w: string) {
+          return (
+            w !== gr.getWord() &&
+            DictionaryManager.sharedLetters(gr.getWord(), w) >=
+              gr.correctLetters()
+          );
+        });
       }
       console.log(this.words.length);
       return;
@@ -56,8 +66,7 @@ export class GreedyAgent implements JottoAgent {
     if (this.flag) {
       this.flag = false;
       return new Promise((resolve) => resolve(this.pickRandomWord()));
-    }
-    else {
+    } else {
       return new Promise((resolve) => resolve(this.guesserGBR()));
     }
   }
@@ -65,10 +74,10 @@ export class GreedyAgent implements JottoAgent {
   private guesserGBR(): string {
     let maxN = 0;
     let guessWord = "";
-    for (let i = 0; i < this.words.length; i++) {
-      let n = this.ExpNumElims(this.words[i]);
+    for (const w of this.words) {
+      const n = this.ExpNumElims(w);
       if (n > maxN) {
-        guessWord = this.words[i];
+        guessWord = w;
         maxN = n;
       }
     }
@@ -76,7 +85,7 @@ export class GreedyAgent implements JottoAgent {
   }
 
   private ExpNumElims(word: string): number {
-    let A = this.AnswerProbs(word);
+    const A = this.AnswerProbs(word);
     let n = 0;
     for (let j = 0; j <= this.L; j++) {
       n += A[j] * this.NumElims(word, j);
@@ -85,26 +94,25 @@ export class GreedyAgent implements JottoAgent {
   }
 
   private AnswerProbs(word: string): number[] {
-    let A = new Array(this.L + 1).fill(0);
+    const A = new Array(this.L + 1).fill(0);
     for (let i = 0; i < this.words.length; i++) {
-      let k = DictionaryManager.NumCommLetts(word, this.words[i]);
+      const k = DictionaryManager.sharedLetters(word, this.words[i]);
       A[k] += this.h[i];
     }
-    let sum = A.reduce((a, b) => a + b, 0);
+    const sum = A.reduce((a, b) => a + b, 0);
     for (let j = 0; j <= this.L; j++) {
       A[j] /= sum;
     }
-    return A; //needs to be 5 elements
+    return A; // needs to be 5 elements
   }
 
   private NumElims(word: string, j: number): number {
     let counter = 0;
-    for(let k = 0; k < this.words.length; k++) {
-      if (DictionaryManager.NumCommLetts(word, this.words[k]) !== j) {
+    for (const w of this.words) {
+      if (DictionaryManager.sharedLetters(word, w) !== j) {
         counter++;
       }
     }
     return counter;
   }
-
 }

@@ -32,15 +32,17 @@ export class DictionaryManager {
     return this.dict[word] !== undefined;
   }
 
-  public static NumCommLetts(word1: string, word2: string): number {
+  /**
+   * returns the number of letters in gword that match a unique letter in sword
+   * @param sword the secret word we're trying to guess
+   * @param gword the guess word
+   */
+  public static sharedLetters(sword: string, gword: string): number {
     let counter = 0;
-    for (let m = 0; m < word1.length; m++) {
-      let c1 = word1.charAt(m);
-      for (let n = 0; n < word2.length; n++) {
-        let c2 = word2.charAt(n);
-        if (c1 == c2) {
-          counter++;
-        }
+    for (const letter of sword) {
+      if (gword.includes(letter)) {
+        counter++;
+        gword = gword.replace(letter, "");
       }
     }
     return counter;

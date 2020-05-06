@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { describe, it } from "mocha";
-import { WORD_BANK_PATH } from "../src/main";
+import { WORD_BANK_PATH } from "../src/constants";
 import { DictionaryManager } from "../src/DictionaryManager";
 
 let dm: DictionaryManager;
@@ -59,6 +59,41 @@ describe("DictionaryManager", function () {
       assert.strictEqual(dm.validate("quick"), true);
       assert.strictEqual(dm.validate("conga"), true);
       assert.strictEqual(dm.validate("laden"), true);
+    });
+  });
+
+  describe("sharedLetters()", function () {
+    it("should return 0 for an empty string in either position", function () {
+      assert.strictEqual(DictionaryManager.sharedLetters("", "asdf"), 0);
+      assert.strictEqual(DictionaryManager.sharedLetters("asdf", ""), 0);
+    });
+
+    it("should return 5 for identical isograms", function () {
+      assert.strictEqual(DictionaryManager.sharedLetters("acorn", "acorn"), 5);
+      assert.strictEqual(DictionaryManager.sharedLetters("charm", "charm"), 5);
+    });
+
+    it("should correctly calculate shared letters for isograms", function () {
+      assert.strictEqual(DictionaryManager.sharedLetters("acorn", "charm"), 3);
+      assert.strictEqual(DictionaryManager.sharedLetters("loser", "sound"), 2);
+      assert.strictEqual(DictionaryManager.sharedLetters("harms", "quick"), 0);
+    });
+
+    it("should get correct shared letters with repeats in guess", function () {
+      assert.strictEqual(DictionaryManager.sharedLetters("halls", "loner"), 1);
+      assert.strictEqual(DictionaryManager.sharedLetters("malls", "lames"), 4);
+      assert.strictEqual(DictionaryManager.sharedLetters("goons", "moons"), 4);
+    });
+
+    it("should get correct shared letters with repeats in secret", function () {
+      assert.strictEqual(DictionaryManager.sharedLetters("loner", "halls"), 1);
+      assert.strictEqual(DictionaryManager.sharedLetters("lames", "malls"), 4);
+      assert.strictEqual(DictionaryManager.sharedLetters("moons", "goons"), 4);
+    });
+
+    it("should get correct shared letters with triple repeats", function () {
+      assert.strictEqual(DictionaryManager.sharedLetters("lllaa", "lames"), 2);
+      assert.strictEqual(DictionaryManager.sharedLetters("lames", "lllaa"), 2);
     });
   });
 });
