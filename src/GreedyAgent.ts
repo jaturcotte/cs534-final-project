@@ -9,15 +9,15 @@ export class GreedyAgent implements JottoAgent {
   private secretWord: string;
   private words: string[];
   private h: number[]; // probability word is selected from dictionary
-  private flag: boolean;
+  private epsilon: number;
   private L: number;
 
   public constructor() {
     this.secretWord = "";
     this.words = [];
     this.h = [];
-    this.flag = true;
     this.L = 5;
+    this.epsilon = 1;
   }
 
   public setUp(): Promise<string> {
@@ -53,6 +53,7 @@ export class GreedyAgent implements JottoAgent {
           );
         });
       }
+      this.epsilon *= 0.7;
       console.log(this.words.length);
       return;
     }
@@ -63,8 +64,7 @@ export class GreedyAgent implements JottoAgent {
   }
 
   public getGuess(): Promise<string> {
-    if (this.flag) {
-      this.flag = false;
+    if (Math.random() < this.epsilon) {
       return new Promise((resolve) => resolve(this.pickRandomWord()));
     } else {
       return new Promise((resolve) => resolve(this.guesserGBR()));
@@ -73,15 +73,19 @@ export class GreedyAgent implements JottoAgent {
 
   private guesserGBR(): string {
     let maxN = 0;
-    let guessWord = "";
+    let bestWords: string[] = [];
+    const startTime = new Date().valueOf();
     for (const w of this.words) {
+      if (new Date().valueOf() - startTime >= 2000) break;
       const n = this.ExpNumElims(w);
       if (n > maxN) {
-        guessWord = w;
+        bestWords = [w];
         maxN = n;
+      } else if (n === maxN) {
+        bestWords.push(w);
       }
     }
-    return guessWord;
+    return bestWords[Math.floor(Math.random() * bestWords.length)];
   }
 
   private ExpNumElims(word: string): number {
@@ -94,7 +98,7 @@ export class GreedyAgent implements JottoAgent {
   }
 
   private AnswerProbs(word: string): number[] {
-    const A = new Array(this.L + 1).fill(0);
+    const A: number[] = new Array(this.L + 1).fill(0);
     for (let i = 0; i < this.words.length; i++) {
       const k = DictionaryManager.sharedLetters(word, this.words[i]);
       A[k] += this.h[i];
