@@ -2,23 +2,22 @@ import { readFile } from "fs";
 import { GuessResult } from "./GuessResult";
 import { JottoAgent } from "./JottoAgent";
 import { WORD_BANK_PATH } from "./main";
+import { DictionaryManager } from "./DictionaryManager";
 
 /** a Jotto agent that makes random guesses, as a baseline */
 export class GreedyAgent implements JottoAgent {
   private secretWord: string;
   private words: string[];
   private h: number[]; //probability word is selected from dictionary
-  private S: number[]; //bit vector
-  private D: number; //length of dictionary or word list
   private flag: boolean;
+  private L: number;
 
   public constructor() {
     this.secretWord = "";
     this.words = [];
     this.h = [];
-    this.S = [];
-    this.D = 0;
     this.flag = true;
+    this.L = 5;
   }
 
   public setUp(): Promise<string> {
@@ -30,9 +29,7 @@ export class GreedyAgent implements JottoAgent {
           .split(/\s+/g)
           .filter((x) => x.length === 5);
         this.secretWord = this.pickRandomWord();
-        this.D = this.words.length;
-        this.h = new Array(this.D).fill(1 / this.D);
-        this.S = new Array(this.D).fill(1);
+        this.h = new Array(this.words.length).fill(1 / this.words.length);
         resolve(this.secretWord);
       });
     });
@@ -40,7 +37,13 @@ export class GreedyAgent implements JottoAgent {
 
   public processResults(gr: GuessResult): void {
     if (!gr.won()) {
-      // we only care about the results if we won
+      if(gr.correctLetters() === 0) {
+        this.words = this.words.filter(function(w:string) {return DictionaryManager.NumCommLetts(gr.getWord(), w) === 0});
+      }
+      else {
+        this.words = this.words.filter(function(w:string) {return DictionaryManager.NumCommLetts(gr.getWord(), w) >= gr.correctLetters()});
+      }
+      console.log(this.words.length);
       return;
     }
   }
@@ -60,10 +63,9 @@ export class GreedyAgent implements JottoAgent {
   }
 
   private guesserGBR(): string {
-    //console.log(this.S.reduce((a, b) => a + b, 0));
     let maxN = 0;
     let guessWord = "";
-    for (let i = 0; i <= this.D; i++) {
+    for (let i = 0; i < this.words.length; i++) {
       let n = this.ExpNumElims(this.words[i]);
       if (n > maxN) {
         guessWord = this.words[i];
@@ -76,22 +78,20 @@ export class GreedyAgent implements JottoAgent {
   private ExpNumElims(word: string): number {
     let A = this.AnswerProbs(word);
     let n = 0;
-    for (let j = 0; j < 5; j++) {
+    for (let j = 0; j <= this.L; j++) {
       n += A[j] * this.NumElims(word, j);
     }
     return n;
   }
 
   private AnswerProbs(word: string): number[] {
-    let A = new Array(5).fill(0);
-    for (let i = 0; i < this.D; i++) {
-      if (this.S[i] == 1) {
-        let k = this.NumCommLetts(word, this.words[i]);
-        A[k] += this.h[i];
-      }
+    let A = new Array(this.L + 1).fill(0);
+    for (let i = 0; i < this.words.length; i++) {
+      let k = DictionaryManager.NumCommLetts(word, this.words[i]);
+      A[k] += this.h[i];
     }
     let sum = A.reduce((a, b) => a + b, 0);
-    for (let j = 0; j < 5; j++) {
+    for (let j = 0; j <= this.L; j++) {
       A[j] /= sum;
     }
     return A; //needs to be 5 elements
@@ -99,23 +99,9 @@ export class GreedyAgent implements JottoAgent {
 
   private NumElims(word: string, j: number): number {
     let counter = 0;
-    for(let k = 0; k < this.D; k++) {
-      if (this.S[k] === 1 && this.NumCommLetts(word, this.words[k]) !== j) {
+    for(let k = 0; k < this.words.length; k++) {
+      if (DictionaryManager.NumCommLetts(word, this.words[k]) !== j) {
         counter++;
-      }
-    }
-    return counter;
-  }
-
-  private NumCommLetts(word1: string, word2: string): number {
-    let counter = 0;
-    for (let m = 0; m < 5; m++) {
-      let c1 = word1.charAt(m);
-      for (let n = 0; n < 5; n++) {
-        let c2 = word2.charAt(n);
-        if (c1 == c2) {
-          counter++;
-        }
       }
     }
     return counter;

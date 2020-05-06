@@ -31,4 +31,18 @@ export class DictionaryManager {
   public validate(word: string): boolean {
     return this.dict[word] !== undefined;
   }
+
+  public static NumCommLetts(word1: string, word2: string): number {
+    let counter = 0;
+    for (let m = 0; m < word1.length; m++) {
+      let c1 = word1.charAt(m);
+      for (let n = 0; n < word2.length; n++) {
+        let c2 = word2.charAt(n);
+        if (c1 == c2) {
+          counter++;
+        }
+      }
+    }
+    return counter;
+  }
 }
