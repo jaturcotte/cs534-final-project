@@ -4,7 +4,7 @@ import { JottoAgent } from "./JottoAgent";
 import { WORD_BANK_PATH } from "./constants";
 import { DictionaryManager } from "./DictionaryManager";
 
-/** a Jotto agent that implements a greedy algorithm, as a baseline */
+/** a Jotto agent that implements a greedy algorithm */
 export class GreedyAgent implements JottoAgent {
   private secretWord: string;
   private words: string[];
@@ -103,7 +103,7 @@ export class GreedyAgent implements JottoAgent {
     for (let j = 0; j <= this.L; j++) {
       A[j] /= sum;
     }
-    return A; //needs to be 5 elements
+    return A; // needs to be 5 elements
   }
 
   private NumElims(word: string, j: number): number {

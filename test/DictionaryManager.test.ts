@@ -91,9 +91,9 @@ describe("DictionaryManager", function () {
       assert.strictEqual(DictionaryManager.sharedLetters("moons", "goons"), 4);
     });
 
-    it("should get correct shared letters with triple repeats", function() {
+    it("should get correct shared letters with triple repeats", function () {
       assert.strictEqual(DictionaryManager.sharedLetters("lllaa", "lames"), 2);
       assert.strictEqual(DictionaryManager.sharedLetters("lames", "lllaa"), 2);
-    })
+    });
   });
 });
