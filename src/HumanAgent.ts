@@ -5,33 +5,31 @@ import { DictionaryManager } from "./DictionaryManager";
 export class HumanAgent implements JottoAgent {
   private stdin: NodeJS.ReadStream;
   private secretWord: string;
-  private dm: DictionaryManager;
+  private dictionaryManager: DictionaryManager;
 
-  public constructor() {
+  public constructor(dm: DictionaryManager) {
     this.stdin = process.stdin;
     this.stdin.setEncoding("utf-8");
     this.secretWord = "";
-    this.dm = new DictionaryManager();
+    this.dictionaryManager = dm;
   }
 
   public setUp(): Promise<string> {
     return new Promise((resolve) => {
-      this.dm.addWordsFromFile().then(() => {
-        console.log("Enter a 5 letter isogram as your secret word: ");
-        const getInput = (data: Buffer): void => {
-          const w = data.toString().trim();
-          if (this.dm.validate(w)) {
-            this.secretWord = w;
-            resolve(w);
-          } else {
-            console.log(`Invalid word: ${w}`);
-            console.log("Enter a 5 letter isogram as your secret word: ");
-            this.stdin.once("data", getInput);
-          }
-          return;
-        };
-        this.stdin.once("data", getInput);
-      });
+      console.log("Enter a 5 letter isogram as your secret word: ");
+      const getInput = (data: Buffer): void => {
+        const w = data.toString().trim();
+        if (this.dictionaryManager.validate(w)) {
+          this.secretWord = w;
+          resolve(w);
+        } else {
+          console.log(`Invalid word: ${w}`);
+          console.log("Enter a 5 letter isogram as your secret word: ");
+          this.stdin.once("data", getInput);
+        }
+        return;
+      };
+      this.stdin.once("data", getInput);
     });
   }
 
@@ -40,7 +38,7 @@ export class HumanAgent implements JottoAgent {
       console.log("\nEnter your guess of the opponent's word: ");
       const getInput = (data: Buffer): void => {
         const w = data.toString().trim();
-        if (this.dm.validate(w)) {
+        if (this.dictionaryManager.validate(w)) {
           resolve(w);
         } else {
           console.log(`Invalid word: ${w}`);

@@ -10,16 +10,17 @@ export class Jotto {
   private p2Secret: string;
   private dictionaryManager: DictionaryManager;
 
-  public constructor(p1: JottoAgent, p2: JottoAgent) {
+  public constructor(p1: JottoAgent, p2: JottoAgent, dm: DictionaryManager) {
     this.p1 = p1;
     this.p2 = p2;
     this.p1Secret = "";
     this.p2Secret = "";
-    this.dictionaryManager = new DictionaryManager();
+    this.dictionaryManager = dm;
   }
 
   public async setUp(): Promise<void> {
-    await this.dictionaryManager.addWordsFromFile();
+    if (this.dictionaryManager.numWords() === 0)
+      await this.dictionaryManager.addWordsFromFile();
     this.p1Secret = await this.p1.setUp();
     this.p2Secret = await this.p2.setUp();
     return;
