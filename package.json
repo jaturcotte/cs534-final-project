@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint 'src/**/*' 'test/**/*' --ext .js,.ts --fix",
+    "build-web": "tsc --project tsconfig-web.json && browserify -v -d build/websrc/web.js -o public_html/bundle.js",
+    "lint": "eslint 'src/**/*' 'websrc/**/*' 'test/**/*' --ext .js,.ts --fix",
     "test": "mocha -r ts-node/register test/**/*.test.ts",
-    "start-ts": "ts-node src/main.ts"
+    "serve": "http-server public_html",
+    "clean": "rm -r build public_html/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -24,9 +26,11 @@
     "@types/node": "^13.13.4",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
+    "browserify": "^16.5.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
+    "http-server": "^0.12.3",
     "mocha": "^7.1.2",
     "prettier": "^2.0.5",
     "ts-node": "^8.10.1",

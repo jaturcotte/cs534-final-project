@@ -1,7 +1,6 @@
-import { readFile } from "fs";
+import { FileManager } from "./FileManager";
 import { GuessResult } from "./GuessResult";
 import { JottoAgent } from "./JottoAgent";
-import { WORD_BANK_PATH } from "./constants";
 
 /** a Jotto agent that makes random guesses, as a baseline */
 export class RandomAgent implements JottoAgent {
@@ -15,12 +14,8 @@ export class RandomAgent implements JottoAgent {
 
   public setUp(): Promise<string> {
     return new Promise((resolve) => {
-      readFile(WORD_BANK_PATH, (err, data) => {
-        if (err) throw err;
-        this.words = data
-          .toString()
-          .split(/\s+/g)
-          .filter((x) => x.length !== 0);
+      FileManager.getWordsAsArray().then((words) => {
+        this.words = words;
         this.secretWord = this.pickRandomWord();
         resolve(this.secretWord);
       });

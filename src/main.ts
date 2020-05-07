@@ -3,7 +3,6 @@ import { GreedyAgent } from "./GreedyAgent";
 import { RandomAgent } from "./RandomAgent";
 
 (function main(): void {
-  console.log("main");
   const p1 = new RandomAgent();
   const p2 = new GreedyAgent();
   const j = new Jotto(p1, p2);

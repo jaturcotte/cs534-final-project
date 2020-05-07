@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "ES6",
+    "target": "ES5",
     "noImplicitAny": true,
-    "lib": ["ES2018"],
+    "lib": ["ES2018", "DOM"],
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "build",
@@ -15,5 +15,5 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["websrc/**/*", "src/**/*"]
 }

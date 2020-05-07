@@ -1,6 +1,5 @@
 import * as assert from "assert";
 import { describe, it } from "mocha";
-import { WORD_BANK_PATH } from "../src/constants";
 import { DictionaryManager } from "../src/DictionaryManager";
 
 let dm: DictionaryManager;
@@ -8,19 +7,19 @@ let dm: DictionaryManager;
 describe("DictionaryManager", function () {
   before(async function () {
     dm = new DictionaryManager();
-    await dm.addWordsFromFile(WORD_BANK_PATH);
+    await dm.addWordsFromFile();
   });
 
   describe("addWordsFromFile()", function () {
     it("should build the dictionary without error", function (done) {
       const dictMan = new DictionaryManager();
-      dictMan.addWordsFromFile(WORD_BANK_PATH).then(done);
+      dictMan.addWordsFromFile().then(done);
     });
   });
 
   describe("numWords()", function () {
     it("should return in the correct number of words", function () {
-      assert.strictEqual(dm.numWords(), 5683);
+      assert.strictEqual(dm.numWords(), 8661);
     });
   });
 
@@ -52,7 +51,7 @@ describe("DictionaryManager", function () {
       assert.strictEqual(dm.validate("hgibh"), false);
       assert.strictEqual(dm.validate("a bje"), false);
       assert.strictEqual(dm.validate("//b93"), false);
-      assert.strictEqual(dm.validate("coach"), false);
+      assert.strictEqual(dm.validate("aoben"), false);
     });
 
     it("should return true for valid words", function () {

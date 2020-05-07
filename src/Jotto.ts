@@ -1,6 +1,5 @@
 import { JottoAgent } from "./JottoAgent";
 import { DictionaryManager } from "./DictionaryManager";
-import { WORD_BANK_PATH } from "./constants";
 import { GuessResult } from "./GuessResult";
 
 /** This class manages the rules for a game of Jotto */
@@ -20,7 +19,7 @@ export class Jotto {
   }
 
   public async setUp(): Promise<void> {
-    await this.dictionaryManager.addWordsFromFile(WORD_BANK_PATH);
+    await this.dictionaryManager.addWordsFromFile();
     this.p1Secret = await this.p1.setUp();
     this.p2Secret = await this.p2.setUp();
     return;

@@ -1,7 +1,6 @@
 import { JottoAgent } from "./JottoAgent";
 import { GuessResult } from "./GuessResult";
 import { DictionaryManager } from "./DictionaryManager";
-import { WORD_BANK_PATH } from "./constants";
 
 export class HumanAgent implements JottoAgent {
   private stdin: NodeJS.ReadStream;
@@ -17,7 +16,7 @@ export class HumanAgent implements JottoAgent {
 
   public setUp(): Promise<string> {
     return new Promise((resolve) => {
-      this.dm.addWordsFromFile(WORD_BANK_PATH).then(() => {
+      this.dm.addWordsFromFile().then(() => {
         console.log("Enter a 5 letter isogram as your secret word: ");
         const getInput = (data: Buffer): void => {
           const w = data.toString().trim();
