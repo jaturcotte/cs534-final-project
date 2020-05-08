@@ -1,6 +1,5 @@
 import { Jotto } from "./Jotto";
 import { GreedyAgent } from "./GreedyAgent";
-import { RandomAgent } from "./RandomAgent";
 import { HumanAgent } from "./HumanAgent";
 import { DictionaryManager } from "./DictionaryManager";
 
