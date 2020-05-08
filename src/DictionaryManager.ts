@@ -7,6 +7,10 @@ export class DictionaryManager {
     this.dict = {};
   }
 
+  public getAllWords(): string[] {
+    return Object.keys(this.dict);
+  }
+
   /** each line of the file should be a separate word */
   public async addWordsFromFile(): Promise<void> {
     const words = await FileManager.getWordsAsArray();

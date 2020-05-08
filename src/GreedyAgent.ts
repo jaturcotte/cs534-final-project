@@ -7,14 +7,14 @@ import { JottoAgent } from "./JottoAgent";
 export class GreedyAgent implements JottoAgent {
   private secretWord: string;
   private words: string[];
-  private h: number[]; // probability word is selected from dictionary
+  private h: any = {}; // probability word is selected from dictionary
   private epsilon: number;
   private L: number;
 
-  public constructor() {
+  public constructor(h = {}) {
     this.secretWord = "";
     this.words = [];
-    this.h = [];
+    this.h = h;
     this.L = 5;
     this.epsilon = 1;
   }
@@ -24,7 +24,11 @@ export class GreedyAgent implements JottoAgent {
       FileManager.getWordsAsArray().then((words) => {
         this.words = words;
         this.secretWord = this.pickRandomWord();
-        this.h = new Array(this.words.length).fill(1 / this.words.length);
+        if(Object.keys(this.h).length !== this.words.length) {
+          for(let i = 0; i < this.words.length; i++) {
+            this.h[this.words[i]] = 1 / this.words.length;
+          }
+        }
         resolve(this.secretWord);
       });
     });
@@ -94,9 +98,13 @@ export class GreedyAgent implements JottoAgent {
 
   private AnswerProbs(word: string): number[] {
     const A: number[] = new Array(this.L + 1).fill(0);
-    for (let i = 0; i < this.words.length; i++) {
-      const k = DictionaryManager.sharedLetters(word, this.words[i]);
-      A[k] += this.h[i];
+    // for (let i = 0; i < this.words.length; i++) {
+    //   const k = DictionaryManager.sharedLetters(word, this.words[i]);
+    //   A[k] += this.h[i];
+    // }
+    for(let w of this.words) {
+      const k = DictionaryManager.sharedLetters(word, w);
+      A[k] += this.h[w];
     }
     const sum = A.reduce((a, b) => a + b, 0);
     for (let j = 0; j <= this.L; j++) {
