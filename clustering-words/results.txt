@@ -1,6 +1,5 @@
-- *barge:* angel, barge, barre, bathe, curve, farts, gauge, image, karma, large
- - *bland:* blame, bland, blend, blood, board, brand, plank, plant, stand
- - *blinkblock:* blinkblock
+ - *barge:* angel, barge, barre, bathe, curve, farts, gauge, image, karma, large
+ - *bland:* blame, bland, blend, blink, blood, board, brand, plank, plant, stand
  - *boris:* april, birds, books, bored, boris, boxes, costs, forks, forms, penis, rosin, words, works
  - *built:* build, built, drill, guild, idiot, nails, pilot, quest, quilt
  - *bunny:* bunny, funny, lunch, sunny
@@ -9,13 +8,14 @@
  - *carry:* cairn, canva, cards, carry, chevy, daisy, early, jerry, savvy
  - *cells:* balls, calls, cells, color, hello, helps, silly, yells
  - *cough:* congo, couch, cough, count, court, laugh, mouth, roach, tough
- - *chair:* chair, chart, check, chimp, choir, hairs, stair
+ - *chair:* chair, chart, chimp, choir, hairs, stair
  - *class:* chess, clash, class, flash, glass, plays, smash
+ - *clock:* block, check, click, clock, pluck, shock
  - *dread:* bread, cream, dread, dream, field, freak, great, plead, proud, ready, treat
  - *drops:* crypt, doors, draws, drops, drugs, drums, frogs, knows, ropes
  - *eight:* eight, fight, light, right, sight, tight
  - *floor:* error, floor, flour, humor, major, spoon
- - *flack:* black, click, clock, flack, flame, flunk, frank, pluck, slack
+ - *flack:* black, flack, flame, flunk, frank, slack
  - *fines:* fangs, fiber, final, fines, fires, fists, flies, links, lives, minds, pines, renew, times, video, wings, yikes
  - *front:* donut, front, frost, frown, fruit, robot, spent, wrong
  - *false:* alien, fails, false, pulse, raise, salsa
@@ -41,7 +41,7 @@
  - *quirk:* quark, quart, quick, quirk, quite
  - *river:* drive, hiker, lived, river, tiger
  - *semen:* demon, human, lemon, semen, seven, women
- - *short:* abort, adorn, ghost, shant, sheet, shift, shirt, shock, shoes, short, shots, smart, swept
+ - *short:* abort, adorn, ghost, shant, sheet, shift, shirt, shoes, short, shots, smart, swept
  - *slice:* anime, juice, scifi, slice, slime, slope, spicy, stick, suite
  - *smell:* shelf, small, smell, spell, still
  - *sucks:* lucky, nicks, punks, rocks, skunk, stuck, sucks
