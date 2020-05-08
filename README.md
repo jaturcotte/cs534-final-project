@@ -19,22 +19,22 @@ $ npm run build
 $ node build/main.js
 ```
 
-Alternatively you can use `ts-node` to just run the TypeScript directly:
+You can also compile a version for use in a browser, and serve it locally:
 
 ```
-$ npm run start-ts
+$ npm run build-web
+$ npm run serve
 ```
 
-To run unit tests from the test folder, do:
+Here are all the npm scripts available:
 
-```
-$ npm run test
-```
-
-You can also lint your code with:
-
-```
-$ npm run lint
-```
-
-to ensure proper formatting.
+  - `$ npm run build` compiles to JavaScript that will run with `node` in the
+    `build` directory
+  - `$ npm run build-web` compiles to JavaScript that will run in a browser
+    in the `public_html` directory
+  - `$ npm run lint` lints all TypeScript files, fixing simple errors and
+    warning about others
+  - `$ npm run test` run unit tests
+  - `$ npm run serve` starts a web server that serves the `public_html`
+    directory
+  - `$ npm run clean` remove compiled JavaScript files

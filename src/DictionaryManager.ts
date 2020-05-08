@@ -1,5 +1,4 @@
-import { createReadStream } from "fs";
-import { createInterface } from "readline";
+import { FileManager } from "./FileManager";
 
 export class DictionaryManager {
   private dict: { [key: string]: boolean };
@@ -9,13 +8,10 @@ export class DictionaryManager {
   }
 
   /** each line of the file should be a separate word */
-  public async addWordsFromFile(wordBankPath: string): Promise<void> {
-    const rl = createInterface({
-      input: createReadStream(wordBankPath),
-      crlfDelay: Infinity,
-    });
-    for await (const line of rl) {
-      this.dict[line] = true;
+  public async addWordsFromFile(): Promise<void> {
+    const words = await FileManager.getWordsAsArray();
+    for (const w of words) {
+      this.dict[w] = true;
     }
   }
 

@@ -14,7 +14,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "ignorePatterns": ["webpack.config.js", "index.js", "node_modules/"],
+  "ignorePatterns": ["node_modules/"],
   "rules": {
     "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
     "@typescript-eslint/explicit-member-accessibility": ["error"],

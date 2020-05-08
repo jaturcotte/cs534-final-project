@@ -1,8 +1,7 @@
-import { readFile } from "fs";
+import { DictionaryManager } from "./DictionaryManager";
+import { FileManager } from "./FileManager";
 import { GuessResult } from "./GuessResult";
 import { JottoAgent } from "./JottoAgent";
-import { WORD_BANK_PATH } from "./constants";
-import { DictionaryManager } from "./DictionaryManager";
 
 /** a Jotto agent that implements a greedy algorithm */
 export class GreedyAgent implements JottoAgent {
@@ -22,12 +21,8 @@ export class GreedyAgent implements JottoAgent {
 
   public setUp(): Promise<string> {
     return new Promise((resolve) => {
-      readFile(WORD_BANK_PATH, (err, data) => {
-        if (err) throw err;
-        this.words = data
-          .toString()
-          .split(/\s+/g)
-          .filter((x) => x.length !== 0);
+      FileManager.getWordsAsArray().then((words) => {
+        this.words = words;
         this.secretWord = this.pickRandomWord();
         this.h = new Array(this.words.length).fill(1 / this.words.length);
         resolve(this.secretWord);
