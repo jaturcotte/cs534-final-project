@@ -1,0 +1,60 @@
+- *barge:* angel, barge, barre, bathe, curve, farts, gauge, image, karma, large
+ - *bland:* blame, bland, blend, blood, board, brand, plank, plant, stand
+ - *blinkblock:* blinkblock
+ - *boris:* april, birds, books, bored, boris, boxes, costs, forks, forms, penis, rosin, words, works
+ - *built:* build, built, drill, guild, idiot, nails, pilot, quest, quilt
+ - *bunny:* bunny, funny, lunch, sunny
+ - *beats:* beach, beans, beats, boats, death, eaten, heads, ideas, means, meats, skate, teams, teeth, whats, yeast
+ - *brain:* begin, brain, brian, brine, crawl, crazy, drain, plain, rainy, slain, train
+ - *carry:* cairn, canva, cards, carry, chevy, daisy, early, jerry, savvy
+ - *cells:* balls, calls, cells, color, hello, helps, silly, yells
+ - *cough:* congo, couch, cough, count, court, laugh, mouth, roach, tough
+ - *chair:* chair, chart, check, chimp, choir, hairs, stair
+ - *class:* chess, clash, class, flash, glass, plays, smash
+ - *dread:* bread, cream, dread, dream, field, freak, great, plead, proud, ready, treat
+ - *drops:* crypt, doors, draws, drops, drugs, drums, frogs, knows, ropes
+ - *eight:* eight, fight, light, right, sight, tight
+ - *floor:* error, floor, flour, humor, major, spoon
+ - *flack:* black, click, clock, flack, flame, flunk, frank, pluck, slack
+ - *fines:* fangs, fiber, final, fines, fires, fists, flies, links, lives, minds, pines, renew, times, video, wings, yikes
+ - *front:* donut, front, frost, frown, fruit, robot, spent, wrong
+ - *false:* alien, fails, false, pulse, raise, salsa
+ - *grape:* crate, drape, frame, glare, grape, grave, shape, trade
+ - *grass:* brass, grass, gross, guess, press, trash
+ - *games:* cakes, camel, gamer, games, gamma, makes, memes, ramps
+ - *goals:* goals, goats, koala, ovals
+ - *green:* given, green, grown, queen, trees
+ - *handy:* candy, daddy, hands, handy, happy, honey, howdy, santa
+ - *heard:* guard, heard, heart, heavy, learn, retro, weird, zebra
+ - *house:* horse, house, joust, moose, mouse, ounce, rogue
+ - *kilts:* kills, kilts, kitty, kiwis, milky
+ - *lower:* jewel, laser, lever, loser, lower, other, polar, power, towel
+ - *mango:* bingo, bongo, mambo, mango, tango
+ - *metal:* aural, mecha, metal, total
+ - *mommy:* comma, dummy, enemy, mommy, money
+ - *music:* magic, music, rubix, visit
+ - *north:* earth, forte, loath, north, torch
+ - *peace:* leave, paced, peace, piece, plate, react, space
+ - *puppy:* jumpy, puppy, pussy
+ - *paint:* haunt, paint, pants, point, print
+ - *paste:* haste, pasta, paste, pesto, photo, taste
+ - *quirk:* quark, quart, quick, quirk, quite
+ - *river:* drive, hiker, lived, river, tiger
+ - *semen:* demon, human, lemon, semen, seven, women
+ - *short:* abort, adorn, ghost, shant, sheet, shift, shirt, shock, shoes, short, shots, smart, swept
+ - *slice:* anime, juice, scifi, slice, slime, slope, spicy, stick, suite
+ - *smell:* shelf, small, smell, spell, still
+ - *sucks:* lucky, nicks, punks, rocks, skunk, stuck, sucks
+ - *super:* euler, paper, saber, super
+ - *stars:* stabs, stars, start
+ - *steam:* scrum, sneak, speak, stamp, steam, steep, steps, straw
+ - *stone:* alone, phone, sting, stone, stope, store, swole
+ - *table:* apple, bible, cable, eagle, table, title, tuple
+ - *taped:* faded, japan, taped, tepid, tired, wiped
+ - *tripe:* strip, tries, tripe, trope, write
+ - *turns:* hurts, turbo, turns
+ - *truck:* thumb, track, trick, truck, truly, trump, trunk, truth
+ - *think:* drink, thank, thicc, thing, think
+ - *watch:* ranch, watch, water, which, witch
+ - *would:* could, found, gourd, round, world, would
+ - *where:* rhyme, there, where, whore

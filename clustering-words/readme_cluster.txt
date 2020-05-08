@@ -17,4 +17,4 @@ To run the program go to the command line and type
 cluster2.py
 -------------------------
 Code from https://stats.stackexchange.com/questions/123060/clustering-a-long-list-of-strings-words-into-similarity-groups
-Make sure you run pip install sklearn before running it.
+Make sure you run pip install sklearn and distance before running it.
