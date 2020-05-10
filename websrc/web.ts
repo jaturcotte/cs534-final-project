@@ -7,21 +7,23 @@ import { DictionaryManager } from "../src/DictionaryManager";
 // Don't use HumanAgent here!
 
 (async (): Promise<void> => {
-  // get word list from server instead of filesystem
-  FileManager.getWordsAsArray = (): Promise<string[]> => {
+  // get string from server instead of filesystem
+  FileManager.getText = (path: string): Promise<string> => {
     return new Promise((resolve) => {
-      fetch("wordbank.txt")
+      fetch(path)
         .then((response) => response.text())
-        .then((text) => {
-          resolve(text.split(/\s+/g).filter((x) => x.length !== 0));
-        });
+        .then(resolve);
     });
   };
 
+  FileManager.WORD_BANK_PATH = "wordbank.txt";
+  FileManager.H_PATH = "words.txt";
+
   const dm = new DictionaryManager();
   await dm.addWordsFromFile();
+  const h = await FileManager.generateH(dm);
   const p1 = new WebAgent(dm);
-  const p2 = new GreedyAgent();
+  const p2 = new GreedyAgent(h);
   const j = new Jotto(p1, p2, dm);
   await j.setUp();
   const val = await j.startGame();
