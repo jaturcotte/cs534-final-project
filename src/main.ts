@@ -3,13 +3,14 @@ import { GreedyAgent } from "./GreedyAgent";
 import { HumanAgent } from "./HumanAgent";
 import { DictionaryManager } from "./DictionaryManager";
 import { FileManager } from "./FileManager";
+import { RandomAgent } from "./RandomAgent";
 
 (async function main(): Promise<void> {
   const dm = new DictionaryManager();
   await dm.addWordsFromFile();
-  //const p1 = new HumanAgent(dm);
+  const p1 = new RandomAgent();
   const h = await FileManager.generateH(dm);
-  const p1 = new GreedyAgent();
+  //const p1 = new GreedyAgent();
   const p2 = new GreedyAgent(h);
   const j = new Jotto(p1, p2, dm);
   await j.setUp();
