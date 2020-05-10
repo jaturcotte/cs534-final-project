@@ -9,6 +9,7 @@ export class WebAgent implements JottoAgent {
   private inputBox: HTMLInputElement;
   private log: HTMLDivElement;
   private submitButton: HTMLButtonElement;
+  private knownScores: { [key: string]: number } = {};
 
   public constructor(dm: DictionaryManager) {
     this.dictionaryManager = dm;
@@ -55,6 +56,7 @@ export class WebAgent implements JottoAgent {
     if (gr.won()) {
       this.output(`You're right, <b>${gr.getWord()}</b> was my word!`);
     } else {
+      this.knownScores[gr.getWord()] = gr.correctLetters();
       this.output(
         `<b>${gr.getWord()}</b> has ` +
           `<b>${gr.correctLetters()}</b> letter` +
