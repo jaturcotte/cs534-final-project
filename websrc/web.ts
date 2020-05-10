@@ -17,11 +17,11 @@ import { DictionaryManager } from "../src/DictionaryManager";
   };
 
   FileManager.WORD_BANK_PATH = "wordbank.txt";
-  FileManager.H_PATH = "words.txt";
+  FileManager.H_PATH = "imdb-frequencies.txt";
 
   const dm = new DictionaryManager();
   await dm.addWordsFromFile();
-  const h = await FileManager.generateH(dm);
+  const h = await FileManager.generateH(FileManager.H_PATH);
   const p1 = new WebAgent(dm);
   const p2 = new GreedyAgent(h);
   const j = new Jotto(p1, p2, dm);

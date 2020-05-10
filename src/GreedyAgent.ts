@@ -21,7 +21,7 @@ export class GreedyAgent implements JottoAgent {
 
   public setUp(): Promise<string> {
     return new Promise((resolve) => {
-      FileManager.getWordsAsArray().then((words) => {
+      FileManager.getWordsAsArray(FileManager.WORD_BANK_PATH).then((words) => {
         this.words = words;
         this.secretWord = this.pickRandomWord();
         if(Object.keys(this.h).length !== this.words.length) {

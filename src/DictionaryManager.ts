@@ -13,7 +13,7 @@ export class DictionaryManager {
 
   /** each line of the file should be a separate word */
   public async addWordsFromFile(): Promise<void> {
-    const words = await FileManager.getWordsAsArray();
+    const words = await FileManager.getWordsAsArray(FileManager.WORD_BANK_PATH);
     for (const w of words) {
       this.dict[w] = true;
     }

@@ -2,12 +2,13 @@ import { DictionaryManager } from "./DictionaryManager";
 import { FileManager } from "./FileManager";
 import { GreedyAgent } from "./GreedyAgent";
 import { Jotto } from "./Jotto";
+import { HumanAgent } from "./HumanAgent";
 
 (async function main(): Promise<void> {
   const dm = new DictionaryManager();
   await dm.addWordsFromFile();
-  const h = await FileManager.generateH(dm);
-  const p1 = new GreedyAgent();
+  const h = await FileManager.generateH(FileManager.H_PATH);
+  const p1 = new HumanAgent(dm);
   const p2 = new GreedyAgent(h);
   const j = new Jotto(p1, p2, dm);
   await j.setUp();
