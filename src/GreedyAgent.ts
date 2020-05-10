@@ -40,15 +40,26 @@ export class GreedyAgent implements JottoAgent {
         this.words = this.words.filter(function (w: string) {
           return (
             w !== gr.getWord() &&
-            DictionaryManager.sharedLetters(gr.getWord(), w) === 0
+            DictionaryManager.sharedLetters(gr.getWord(), w) === 0 &&
+              !gr.isAnagram(w, gr.getWord())
           );
         });
-      } else {
+      }
+      else if (gr.correctLetters() < 5) {
         this.words = this.words.filter(function (w: string) {
           return (
             w !== gr.getWord() &&
             DictionaryManager.sharedLetters(gr.getWord(), w) >=
-              gr.correctLetters()
+            gr.correctLetters() && !gr.isAnagram(w, gr.getWord())
+          );
+        });
+      }
+      else {
+        this.words = this.words.filter(function (w: string) {
+          return (
+            w !== gr.getWord() &&
+            DictionaryManager.sharedLetters(gr.getWord(), w) >=
+            gr.correctLetters()
           );
         });
       }
@@ -98,10 +109,6 @@ export class GreedyAgent implements JottoAgent {
 
   private AnswerProbs(word: string): number[] {
     const A: number[] = new Array(this.L + 1).fill(0);
-    // for (let i = 0; i < this.words.length; i++) {
-    //   const k = DictionaryManager.sharedLetters(word, this.words[i]);
-    //   A[k] += this.h[i];
-    // }
     for(let w of this.words) {
       const k = DictionaryManager.sharedLetters(word, w);
       A[k] += this.h[w];
