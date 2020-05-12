@@ -62,4 +62,6 @@ export class HumanAgent implements JottoAgent {
       );
     }
   }
+
+  public output: (message: string) => void = console.log;
 }

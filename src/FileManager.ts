@@ -1,6 +1,5 @@
 import { readFile, promises as fspromises, createReadStream } from "fs";
 import { join } from "path";
-import { DictionaryManager } from "./DictionaryManager";
 import { createInterface } from "readline";
 
 export const FileManager = {
@@ -29,10 +28,10 @@ export const FileManager = {
    * @param path the path to a file containing a stringified JSON of word
    * frequencies
    */
-  generateH: (path: string): Promise<{[key: string]: number}> => {
+  generateH: (path: string): Promise<{ [key: string]: number }> => {
     return new Promise((resolve) => {
       FileManager.getText(path).then((text) => {
-        const h: {[key: string]: number} = JSON.parse(text);
+        const h: { [key: string]: number } = JSON.parse(text);
         for (const key in h) {
           h[key]++;
         }
@@ -45,9 +44,11 @@ export const FileManager = {
     });
   },
 
-  frequenciesFromFolder: async (path: string): Promise<Object> => {
+  frequenciesFromFolder: async (
+    path: string
+  ): Promise<Record<string, number>> => {
     const words: { [key: string]: number } = {};
-    let arr = await FileManager.getWordsAsArray(FileManager.WORD_BANK_PATH);
+    const arr = await FileManager.getWordsAsArray(FileManager.WORD_BANK_PATH);
     for (const w of arr) {
       words[w] = 0;
     }

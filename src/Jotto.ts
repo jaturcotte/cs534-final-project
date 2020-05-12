@@ -1,6 +1,7 @@
 import { JottoAgent } from "./JottoAgent";
 import { DictionaryManager } from "./DictionaryManager";
 import { GuessResult } from "./GuessResult";
+import { GLOBALS } from "./main";
 
 /** This class manages the rules for a game of Jotto */
 export class Jotto {
@@ -23,6 +24,7 @@ export class Jotto {
       await this.dictionaryManager.addWordsFromFile();
     this.p1Secret = await this.p1.setUp();
     this.p2Secret = await this.p2.setUp();
+    GLOBALS.out += this.p2Secret + ", ";
     return;
   }
 
@@ -47,11 +49,9 @@ export class Jotto {
     let turnCounter = 0;
     while (turnCounter < 1000) {
       turnCounter++;
-      console.log("Start p1's turn");
       let result = await this.oneTurn(this.p1, this.p2Secret);
       this.p1.processResults(result);
       if (result.won()) return { winner: this.p1, turns: turnCounter };
-      console.log("Start p2's turn");
       result = await this.oneTurn(this.p2, this.p1Secret);
       this.p2.processResults(result);
       if (result.won()) return { winner: this.p2, turns: turnCounter };
@@ -64,17 +64,21 @@ export class Jotto {
     secret: string
   ): Promise<GuessResult> {
     const guess = await activePlayer.getGuess();
-    const playerName = activePlayer === this.p1 ? "p1" : "p2";
-    console.log(playerName + " guesses '" + guess + "'");
+    const opponent = activePlayer === this.p1 ? this.p2 : this.p1;
     if (!this.dictionaryManager.validate(guess)) {
       throw new Error("Illegal word '" + guess + "'");
     }
-    if (guess === secret) return new GuessResult(guess, true, 5);
+    if (guess === secret) {
+      opponent.output(`I guess ${guess}...`);
+      return new GuessResult(guess, true, 5);
+    }
 
-    return new GuessResult(
-      guess,
-      false,
-      DictionaryManager.sharedLetters(secret, guess)
+    const sharedLetters = DictionaryManager.sharedLetters(secret, guess);
+    opponent.output(
+      `I guess <b>${guess}</b>, which shares <b>${sharedLetters}</b> letter${
+        sharedLetters !== 1 ? "s" : ""
+      } with your secret word`
     );
+    return new GuessResult(guess, false, sharedLetters);
   }
 }

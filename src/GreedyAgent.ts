@@ -2,12 +2,13 @@ import { DictionaryManager } from "./DictionaryManager";
 import { FileManager } from "./FileManager";
 import { GuessResult } from "./GuessResult";
 import { JottoAgent } from "./JottoAgent";
+import { GLOBALS } from "./main";
 
 /** a Jotto agent that implements a greedy algorithm */
 export class GreedyAgent implements JottoAgent {
   private secretWord: string;
   private words: string[];
-  private h: any = {}; // probability word is selected from dictionary
+  private h: Record<string, number> = {}; // frequency table
   private epsilon: number;
   private L: number;
 
@@ -16,7 +17,7 @@ export class GreedyAgent implements JottoAgent {
     this.words = [];
     this.h = h;
     this.L = 5;
-    this.epsilon = 1;
+    this.epsilon = 0;
   }
 
   public setUp(): Promise<string> {
@@ -24,9 +25,9 @@ export class GreedyAgent implements JottoAgent {
       FileManager.getWordsAsArray(FileManager.WORD_BANK_PATH).then((words) => {
         this.words = words;
         this.secretWord = this.pickRandomWord();
-        if(Object.keys(this.h).length !== this.words.length) {
-          for(let i = 0; i < this.words.length; i++) {
-            this.h[this.words[i]] = 1 / this.words.length;
+        if (Object.keys(this.h).length !== this.words.length) {
+          for (const w of this.words) {
+            this.h[w] = 1 / this.words.length;
           }
         }
         resolve(this.secretWord);
@@ -41,30 +42,29 @@ export class GreedyAgent implements JottoAgent {
           return (
             w !== gr.getWord() &&
             DictionaryManager.sharedLetters(gr.getWord(), w) === 0 &&
-              !gr.isAnagram(w, gr.getWord())
+            !gr.isAnagram(w, gr.getWord())
           );
         });
-      }
-      else if (gr.correctLetters() < 5) {
+      } else if (gr.correctLetters() < 5) {
         this.words = this.words.filter(function (w: string) {
           return (
             w !== gr.getWord() &&
             DictionaryManager.sharedLetters(gr.getWord(), w) >=
-            gr.correctLetters() && !gr.isAnagram(w, gr.getWord())
+              gr.correctLetters() &&
+            !gr.isAnagram(w, gr.getWord())
           );
         });
-      }
-      else {
+      } else {
         this.words = this.words.filter(function (w: string) {
           return (
             w !== gr.getWord() &&
             DictionaryManager.sharedLetters(gr.getWord(), w) >=
-            gr.correctLetters()
+              gr.correctLetters()
           );
         });
       }
       this.epsilon *= 0.7;
-      console.log(this.words.length);
+      GLOBALS.out += this.words.length + ", ";
       return;
     }
   }
@@ -109,7 +109,7 @@ export class GreedyAgent implements JottoAgent {
 
   private AnswerProbs(word: string): number[] {
     const A: number[] = new Array(this.L + 1).fill(0);
-    for(let w of this.words) {
+    for (const w of this.words) {
       const k = DictionaryManager.sharedLetters(word, w);
       A[k] += this.h[w];
     }
@@ -129,4 +129,6 @@ export class GreedyAgent implements JottoAgent {
     }
     return counter;
   }
+
+  public output: (message: string) => void = console.log;
 }

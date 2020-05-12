@@ -7,6 +7,9 @@ import { DictionaryManager } from "../src/DictionaryManager";
 // Don't use HumanAgent here!
 
 (async (): Promise<void> => {
+  FileManager.WORD_BANK_PATH = "wordbank.txt";
+  FileManager.H_PATH = "imdb-frequencies.txt";
+
   // get string from server instead of filesystem
   FileManager.getText = (path: string): Promise<string> => {
     return new Promise((resolve) => {
@@ -15,9 +18,6 @@ import { DictionaryManager } from "../src/DictionaryManager";
         .then(resolve);
     });
   };
-
-  FileManager.WORD_BANK_PATH = "wordbank.txt";
-  FileManager.H_PATH = "imdb-frequencies.txt";
 
   const dm = new DictionaryManager();
   await dm.addWordsFromFile();
@@ -28,11 +28,11 @@ import { DictionaryManager } from "../src/DictionaryManager";
   await j.setUp();
   const val = await j.startGame();
   if (val.winner === null) {
-    console.log("Game ended without a winner after 1000 turns");
+    p1.output("The game ended without a winner after 1000 turns");
   } else if (val.winner === p1) {
-    console.log("P1 wins after " + val.turns + " turns");
+    p1.output(`Congratulations! It took ${val.turns} turns for you to win`)
   } else {
-    console.log("P2 wins after " + val.turns + " turns");
+    p1.output(`I win! And it only took me ${val.turns} turns`)
   }
   return;
 })();
