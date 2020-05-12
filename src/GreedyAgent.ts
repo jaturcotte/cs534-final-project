@@ -17,7 +17,7 @@ export class GreedyAgent implements JottoAgent {
     this.words = [];
     this.h = h;
     this.L = 5;
-    this.epsilon = 0;
+    this.epsilon = 1;
   }
 
   public setUp(): Promise<string> {
@@ -63,7 +63,7 @@ export class GreedyAgent implements JottoAgent {
           );
         });
       }
-      this.epsilon *= 0.7;
+      this.epsilon = 0;
       GLOBALS.out += this.words.length + ", ";
       return;
     }

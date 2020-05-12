@@ -59,10 +59,10 @@ export class WebAgent implements JottoAgent {
     return new Promise((resolve) => {
       setTimeout(() => {
         this.output("Try to guess my word");
-        this.getNextWord().then(word => {
+        this.getNextWord().then((word) => {
           if (this.log.lastChild !== null)
             this.log.removeChild(this.log.lastChild);
-          resolve(word)
+          resolve(word);
         });
       }, 300);
     });

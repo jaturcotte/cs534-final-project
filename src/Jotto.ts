@@ -6,7 +6,6 @@ export const GLOBALS = {
   out: "",
 };
 
-
 /** This class manages the rules for a game of Jotto */
 export class Jotto {
   private p1: JottoAgent;
@@ -78,14 +77,13 @@ export class Jotto {
           resolve(new GuessResult(guess, true, 5));
         }
 
-        const sharedLetters = DictionaryManager.sharedLetters(secret, guess);
+        const sl = DictionaryManager.sharedLetters(secret, guess);
         opponent.output(
-          `I guess <b>${guess}</b>, which shares <b>${sharedLetters}</b> letter${
-            sharedLetters !== 1 ? "s" : ""
+          `I guess <b>${guess}</b>, which shares <b>${sl}</b> letter${
+            sl !== 1 ? "s" : ""
           } with your secret word`
         );
-        console.log(GLOBALS.out);
-        resolve(new GuessResult(guess, false, sharedLetters));
+        resolve(new GuessResult(guess, false, sl));
       });
     });
   }

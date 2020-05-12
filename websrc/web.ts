@@ -38,7 +38,7 @@ import { DictionaryManager } from "../src/DictionaryManager";
     p1.output(`I win! And it only took me ${val.turns} turns`);
     GLOBALS.out = val.turns + ", " + GLOBALS.out;
   }
-  fetch("/jotto-result", {
+  fetch("/jotto", {
     method: "post",
     headers: {
       Accept: "application/json",
@@ -46,13 +46,14 @@ import { DictionaryManager } from "../src/DictionaryManager";
     },
     body: JSON.stringify({
       agent: dice < 0.5 ? "HGreedy" : "UniformGreedy",
-      results: GLOBALS.out,
+      results: GLOBALS.out + "\n",
     }),
   }).then((response) => {
     console.log(response);
     document.getElementById("input")?.remove();
-    const b = document.getElementById("submit-button");
+    const b = document.getElementById("submit-button") as HTMLButtonElement;
     if (b) b.innerText = "Play again?";
+    b.disabled = false;
     return;
   });
 })();
