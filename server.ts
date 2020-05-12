@@ -5,12 +5,11 @@ import { join } from "path";
 
 const app = express();
 
-app.use(express.static(join(__dirname, "public_html")));
+app.use("/jotto", express.static(join(__dirname, "public_html")));
 app.use(bodyParser.json());
 const port = process.env.NODE_PORT || 3900;
 
 app.post("/jotto", (req: Request, res: Response) => {
-  console.log("Here");
   let f = "";
   if (req.body.agent === "UniformGreedy") {
     f = "uniformgreedy-v-human.csv";

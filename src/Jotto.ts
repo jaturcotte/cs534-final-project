@@ -43,6 +43,7 @@ export class Jotto {
   public async startGame(): Promise<{
     winner: JottoAgent | null;
     turns: number;
+    winnersWord: string | null;
   }> {
     if (!this.dictionaryManager.validate(this.p1Secret))
       throw new Error("p1 has illegal secret word: '" + this.p1Secret + "'");
@@ -54,12 +55,22 @@ export class Jotto {
       turnCounter++;
       let result = await this.oneTurn(this.p1, this.p2Secret);
       this.p1.processResults(result);
-      if (result.won()) return { winner: this.p1, turns: turnCounter };
+      if (result.won())
+        return {
+          winner: this.p1,
+          turns: turnCounter,
+          winnersWord: this.p2Secret,
+        };
       result = await this.oneTurn(this.p2, this.p1Secret);
       this.p2.processResults(result);
-      if (result.won()) return { winner: this.p2, turns: turnCounter };
+      if (result.won())
+        return {
+          winner: this.p2,
+          turns: turnCounter,
+          winnersWord: this.p1Secret,
+        };
     }
-    return { winner: null, turns: turnCounter };
+    return { winner: null, turns: turnCounter, winnersWord: null };
   }
 
   private oneTurn(
