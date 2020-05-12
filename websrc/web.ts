@@ -36,7 +36,7 @@ import { DictionaryManager } from "../src/DictionaryManager";
     GLOBALS.out = -1 * val.turns + ", " + GLOBALS.out;
   } else {
     p1.output(`I win! And it only took me ${val.turns} turns`);
-    p1.output(`My secret word was ${val.winnersWord}`);
+    p1.output(`My secret word was <b>${val.winnersWord}</b>`);
     GLOBALS.out = val.turns + ", " + GLOBALS.out;
   }
   fetch("/jotto", {
