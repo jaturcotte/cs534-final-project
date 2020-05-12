@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "build-web": "tsc --project tsconfig-web.json && browserify -v -d build/websrc/web.js -o public_html/bundle.js",
+    "build-web": "tsc --project tsconfig-web.json && browserify -v -d build/websrc/web.js -o public_html/bundle.js && tsc server.ts --esModuleInterop",
     "lint": "eslint 'src/**/*' 'websrc/**/*' 'test/**/*' --ext .js,.ts --fix",
     "test": "mocha -r ts-node/register test/**/*.test.ts",
     "serve": "ts-node server.ts",

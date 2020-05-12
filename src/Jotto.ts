@@ -59,7 +59,7 @@ export class Jotto {
         return {
           winner: this.p1,
           turns: turnCounter,
-          winnersWord: this.p2Secret,
+          winnersWord: this.p1Secret,
         };
       result = await this.oneTurn(this.p2, this.p1Secret);
       this.p2.processResults(result);
@@ -67,7 +67,7 @@ export class Jotto {
         return {
           winner: this.p2,
           turns: turnCounter,
-          winnersWord: this.p1Secret,
+          winnersWord: this.p2Secret,
         };
     }
     return { winner: null, turns: turnCounter, winnersWord: null };
