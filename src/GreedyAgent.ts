@@ -2,7 +2,7 @@ import { DictionaryManager } from "./DictionaryManager";
 import { FileManager } from "./FileManager";
 import { GuessResult } from "./GuessResult";
 import { JottoAgent } from "./JottoAgent";
-import { GLOBALS } from "./main";
+import { GLOBALS } from "./Jotto";
 
 /** a Jotto agent that implements a greedy algorithm */
 export class GreedyAgent implements JottoAgent {

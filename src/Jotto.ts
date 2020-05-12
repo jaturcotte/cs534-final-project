@@ -1,7 +1,11 @@
 import { JottoAgent } from "./JottoAgent";
 import { DictionaryManager } from "./DictionaryManager";
 import { GuessResult } from "./GuessResult";
-import { GLOBALS } from "./main";
+
+export const GLOBALS = {
+  out: "",
+};
+
 
 /** This class manages the rules for a game of Jotto */
 export class Jotto {
@@ -59,26 +63,30 @@ export class Jotto {
     return { winner: null, turns: turnCounter };
   }
 
-  private async oneTurn(
+  private oneTurn(
     activePlayer: JottoAgent,
     secret: string
   ): Promise<GuessResult> {
-    const guess = await activePlayer.getGuess();
-    const opponent = activePlayer === this.p1 ? this.p2 : this.p1;
-    if (!this.dictionaryManager.validate(guess)) {
-      throw new Error("Illegal word '" + guess + "'");
-    }
-    if (guess === secret) {
-      opponent.output(`I guess ${guess}...`);
-      return new GuessResult(guess, true, 5);
-    }
+    return new Promise((resolve) => {
+      activePlayer.getGuess().then((guess) => {
+        const opponent = activePlayer === this.p1 ? this.p2 : this.p1;
+        if (!this.dictionaryManager.validate(guess)) {
+          throw new Error("Illegal word '" + guess + "'");
+        }
+        if (guess === secret) {
+          opponent.output(`I guess ${guess}...`);
+          resolve(new GuessResult(guess, true, 5));
+        }
 
-    const sharedLetters = DictionaryManager.sharedLetters(secret, guess);
-    opponent.output(
-      `I guess <b>${guess}</b>, which shares <b>${sharedLetters}</b> letter${
-        sharedLetters !== 1 ? "s" : ""
-      } with your secret word`
-    );
-    return new GuessResult(guess, false, sharedLetters);
+        const sharedLetters = DictionaryManager.sharedLetters(secret, guess);
+        opponent.output(
+          `I guess <b>${guess}</b>, which shares <b>${sharedLetters}</b> letter${
+            sharedLetters !== 1 ? "s" : ""
+          } with your secret word`
+        );
+        console.log(GLOBALS.out);
+        resolve(new GuessResult(guess, false, sharedLetters));
+      });
+    });
   }
 }

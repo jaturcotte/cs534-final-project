@@ -1,12 +1,8 @@
 import { DictionaryManager } from "./DictionaryManager";
 import { FileManager } from "./FileManager";
 import { GreedyAgent } from "./GreedyAgent";
-import { Jotto } from "./Jotto";
+import { Jotto, GLOBALS } from "./Jotto";
 import { RandomAgent } from "./RandomAgent";
-
-export const GLOBALS = {
-  out: "",
-};
 
 (async function main(): Promise<void> {
   GLOBALS.out = "";
