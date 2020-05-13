@@ -130,5 +130,6 @@ export class WebAgent implements JottoAgent {
       s.appendChild(l);
       this.previous.appendChild(s);
     }
+    this.previous.scrollTo(0, this.previous.scrollHeight);
   }
 }

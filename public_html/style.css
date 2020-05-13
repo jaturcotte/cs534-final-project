@@ -61,6 +61,7 @@ div#previous {
   left: 600px;
   max-height: 600px;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 div#previous span {
