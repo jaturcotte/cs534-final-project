@@ -89,7 +89,6 @@ export class WebAgent implements JottoAgent {
     setTimeout(() => (p.style.opacity = "1"), 300);
     p.innerHTML = sentence;
     this.log.appendChild(p);
-    window.scrollTo(0, this.log.scrollHeight);
     this.log.scrollTo(0, this.log.scrollHeight);
   }
 
