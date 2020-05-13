@@ -34,11 +34,14 @@ main {
   background-color: #eeeeee;
   padding: 1em;
   border-radius: 0.5em;
-  position: relative;
 }
 
 .clear {
   clear: both;
+}
+
+div#main-container {
+  position: relative;
 }
 
 div#log {

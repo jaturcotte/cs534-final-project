@@ -35,7 +35,7 @@ export class WebAgent implements JottoAgent {
     this.log.id = "log";
     this.previous = document.createElement("div");
     this.previous.id = "previous";
-    const main = document.getElementById("main");
+    const main = document.getElementById("main-container");
     if (main === null) throw new Error("Main not found");
     main.appendChild(this.log);
     this.form.appendChild(this.inputBox);
