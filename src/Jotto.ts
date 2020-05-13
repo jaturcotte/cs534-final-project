@@ -84,7 +84,6 @@ export class Jotto {
           throw new Error("Illegal word '" + guess + "'");
         }
         if (guess === secret) {
-          opponent.output(`I guess ${guess}...`);
           resolve(new GuessResult(guess, true, 5));
         }
 
