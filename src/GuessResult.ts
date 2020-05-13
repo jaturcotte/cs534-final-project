@@ -27,4 +27,10 @@ export class GuessResult {
   public correctLetters(): number {
     return this.numCorrect;
   }
+
+  public isAnagram(word1: string, word2: string): boolean {
+    const word1Array = word1.split("").sort().join(""),
+      word2Array = word2.split("").sort().join("");
+    return word1Array === word2Array;
+  }
 }

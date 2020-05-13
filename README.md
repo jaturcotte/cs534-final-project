@@ -26,6 +26,8 @@ $ npm run build-web
 $ npm run serve
 ```
 
+Then navigate your browser to `http://localhost:3900/jotto/` to play it.
+
 Here are all the npm scripts available:
 
   - `$ npm run build` compiles to JavaScript that will run with `node` in the

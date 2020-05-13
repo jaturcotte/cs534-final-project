@@ -3,3 +3,4 @@ build/
 *.swp
 .vscode
 public_html/bundle.js
+server.js

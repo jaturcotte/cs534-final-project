@@ -3,7 +3,84 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Jotto</title>
+    <meta
+      name="description"
+      content="Play Jotto, a simple word-guessing game, online against a computer"
+    />
+    <meta property="og:title" content="Jotto" />
+    <meta
+      property="og:description"
+      content="Play Jotto, a simple word-guessing game, online against a computer"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://josephpetitti.com/jotto/" />
+
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="/images/favicon-16.png"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="/images/favicon-96.png"
+      sizes="96x96"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="/images/favicon-192.png"
+      sizes="192x192"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="/images/favicon-32.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <meta name="theme-color" content="#1f0053" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
-  <body></body>
+  <body>
+    <h1 class="title">Jotto</h1>
+
+    <main id="main">
+      <h2>Instructions</h2>
+
+      <p>
+        In Jotto, each player thinks of a secret five letter word. Then, you
+        take turns trying to guess your opponent's five letter word. If you get
+        it wrong, you'll at least find out how many letters your guess has in
+        common with the correct word.
+      </p>
+
+      <p>
+        Repeating letters is okay. For example, if the secret word it "apple"
+        and you guess "popes", that's 3 letters in common (two p's and one e).
+      </p>
+
+      <p>
+        Once you enter a word, a grid of letters will appear. Click on these to
+        keep track of which letters you know are (or are not) in your opponent's
+        word. Use smart guesses to eliminate letters and figure out the
+        computer's secret word before it figures out yours!
+      </p>
+
+      <div id="main-container"></div>
+    </main>
+    <div id="credits">
+      Created by 
+      <a href="https://github.com/jlfong">Janette Fong</a>,
+      <a href="https://acnolan.tech/">Andrew Nolan</a>,
+      <a href="https://josephpetitti.com">Joseph Petitti</a>, and
+      <a href="https://github.com/jaturcotte">Joseph Turcotte</a> <br>
+      <a href="https://github.com/jaturcotte/cs534-final-project/"
+        >View source</a
+      >
+    </div>
+  </body>
   <script src="bundle.js"></script>
 </html>

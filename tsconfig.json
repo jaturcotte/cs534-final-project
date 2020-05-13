@@ -9,6 +9,7 @@
     "outDir": "build",
     "baseUrl": ".",
     "strict": true,
+    "esModuleInterop": true,
     "noImplicitReturns": true,
     "diagnostics": true,
     "paths": {

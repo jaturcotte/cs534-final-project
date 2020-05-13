@@ -16,7 +16,7 @@ export class HumanAgent implements JottoAgent {
 
   public setUp(): Promise<string> {
     return new Promise((resolve) => {
-      console.log("Enter a 5 letter isogram as your secret word: ");
+      console.log("Enter a 5 letter word as your secret word: ");
       const getInput = (data: Buffer): void => {
         const w = data.toString().trim();
         if (this.dictionaryManager.validate(w)) {
@@ -24,7 +24,7 @@ export class HumanAgent implements JottoAgent {
           resolve(w);
         } else {
           console.log(`Invalid word: ${w}`);
-          console.log("Enter a 5 letter isogram as your secret word: ");
+          console.log("Enter a 5 letter word as your secret word: ");
           this.stdin.once("data", getInput);
         }
         return;
@@ -62,4 +62,6 @@ export class HumanAgent implements JottoAgent {
       );
     }
   }
+
+  public output: (message: string) => void = console.log;
 }

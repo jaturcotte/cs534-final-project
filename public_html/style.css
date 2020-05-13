@@ -1,0 +1,417 @@
+/** Colors
+ * Header:  #005377;
+ * Orange: #f1a208;
+ * h1: #8eabdb;
+ * Background: #1f0053;
+ * Buttons and other elements: #3066be;
+ * Hovered buttons: #4ea5d9;
+ */
+
+/* Whole Page */
+html,
+body {
+  width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 13pt;
+  background-color: #5b5b5b;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html,
+div {
+  font-family: "Deja Vu Sans", Lato, "noto sans", sans-serif;
+}
+
+main img {
+  max-width: 100%;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #eeeeee;
+  padding: 1em;
+  border-radius: 0.5em;
+}
+
+.clear {
+  clear: both;
+}
+
+div#main-container {
+  position: relative;
+}
+
+div#log {
+  height: 600px;
+  width: 400px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+div#log p {
+  transition: opacity 0.2s;
+}
+
+div#side-bar {
+  position: absolute;
+  top: 0;
+  left: 600px;
+}
+
+div#previous {
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  max-height: 280px;
+}
+
+div#side-bar span {
+  font-family: "Liberation Mono", monospace;
+}
+
+div#previous span.known-score-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+div#letter-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+div.letter {
+  border: 1px solid gray;
+  background-color: rgba(0, 0, 0, 0);
+  text-align: center;
+  flex-basis: 2.5em;
+  padding: 0.5em 0;
+  cursor: pointer;
+  user-select: none;
+  margin: -1px 0 0 -1px;
+}
+
+form#input-form {
+  margin-bottom: 1em;
+}
+
+div#credits, div#credits a {
+  text-align: center;
+  width: 100%;
+  color: #ddd;
+}
+
+div#credits a:hover {
+  color: #529bfd;
+}
+
+/* Text */
+h1.title {
+  font-family: "Montserrat", Lato, "Noto Sans", sans-serif;
+  text-align: center;
+  margin: 1.5em auto;
+  font-size: 3em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #eeeeee;
+}
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+  font-family: "Merriweather", sans-serif;
+}
+
+a {
+  color: #529bfd;
+  transition: color 0.2s;
+  text-decoration-line: underline;
+}
+
+a:hover {
+  color: #007acc;
+}
+
+sup a {
+  text-decoration: none;
+}
+
+.code,
+code {
+  font-family: "Liberation Mono", monospace;
+  background-color: #2b2b2b;
+  padding: 1px 3px;
+  border-radius: 5px;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+div.code,
+code.block {
+  padding: 15px 10px 15px 15px;
+  border-radius: 0 5px 5px 0;
+  border-left: 4px solid #f1a208;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  display: block;
+}
+
+p.quote {
+  font-family: "Merriweather", serif;
+  font-style: italic;
+  margin-inline-start: 2em;
+  font-size: 1.25em;
+  color: #8899aa;
+}
+
+p.quote.block,
+figure p.quote.block {
+  text-align: left;
+  font-size: 1em;
+  padding-left: 1em;
+  margin-left: 1em;
+  border-left: 4px solid #8899aa;
+}
+
+figure p.quote {
+  margin-inline-start: 0;
+  text-align: center;
+}
+
+p.quote::before {
+  content: "“";
+}
+p.quote::after {
+  content: "”";
+}
+
+/* Tables */
+main table {
+  border-collapse: collapse;
+  box-sizing: border-box;
+}
+
+main table td,
+main table th {
+  padding: 2px 0.75em 2px;
+  text-align: left;
+}
+
+main table th.r,
+main table td.r {
+  text-align: right;
+}
+
+main table thead.header th {
+  border-bottom: 1px solid #bbccdd;
+}
+
+/* Figures */
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em;
+}
+
+figure.float.right {
+  float: right;
+  width: 40%;
+  margin-right: 0em;
+}
+
+figure.float.left {
+  float: left;
+  width: 40%;
+  margin-left: 0em;
+}
+
+figure.full-width {
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+figcaption {
+  font-size: 0.875em;
+  text-align: center;
+  color: #99aabb;
+  margin-top: 0.25em;
+}
+
+video {
+  max-width: 100%;
+}
+
+/* Buttons */
+button.long {
+  z-index: 0;
+  min-width: 200px;
+  border: none;
+  width: 12em;
+}
+
+a button {
+  cursor: pointer;
+}
+
+button.green {
+  background-color: #417b5a;
+}
+
+button.medium {
+  width: 6em;
+}
+
+button,
+.button-like {
+  font-size: 1.125em;
+  color: #eee;
+  background-color: #3066be;
+  padding: 10px;
+  border: none;
+  box-shadow: 5px 5px rgba(0, 0, 0, 1);
+  transition: background-color 0.2s, box-shadow 0.2s;
+  margin: 5px;
+  border-radius: 4px;
+}
+
+button[disabled],
+.button-like[disabled],
+.long-buttons a:hover button[disabled],
+button[disabled]:hover,
+.button-like[disabled]:hover {
+  background-color: #d2d2d2;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.long-buttons a:hover button,
+button:hover,
+.button-like:hover {
+  text-shadow: none;
+  background-color: #4ea5d9;
+  box-shadow: 6px 6px 10px 1px rgba(0, 0, 0, 1);
+}
+
+.long-buttons a:active button,
+button:active,
+.button-like:active {
+  text-shadow: none;
+  background-color: #4ea5d9;
+  box-shadow: 3px 3px rgba(0, 0, 0, 1);
+}
+
+div.main-links-holder {
+  display: flex;
+  justify-content: space-around;
+  padding: 2em 0;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+/* Footer */
+footer {
+  clear: both;
+  max-width: 800px;
+  margin: 4em auto 0;
+  display: flex;
+  border-top: 1px solid gray;
+}
+
+footer section {
+  flex-basis: 50%;
+  padding: 20px;
+}
+
+footer section dt {
+  display: block;
+  margin: 0;
+  clear: left;
+  float: left;
+}
+
+footer section dd {
+  margin: 0 0 0.85em 5.5em;
+}
+
+footer section ul.icons {
+  font-family: FontAwesome;
+  font-size: 2.5em;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 1em 0;
+  padding: 0;
+}
+
+footer section ul.icons li {
+  display: inline;
+}
+
+/* Fade in */
+.fadein {
+  opacity: 0;
+  transform: translate(0, 20px);
+  transition: transform 1s, opacity 1s;
+}
+
+.fadein.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Mobile */
+@media screen and (max-width: 1000px) {
+  h1.title {
+    font-size: 2em;
+  }
+
+  footer {
+    flex-direction: column;
+  }
+
+  div.main-links-holder {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  figure.float.left,
+  figure.float.right {
+    width: 100%;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+
+  p.quote {
+    margin-inline-start: 0;
+  }
+
+  div#log {
+    height: auto;
+    width: auto;
+    overflow-y: auto;
+  }
+
+  div#side-bar {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  div#previous {
+    max-height: auto;
+    overflow-y: auto;
+  }
+}

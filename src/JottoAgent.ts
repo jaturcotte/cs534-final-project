@@ -12,4 +12,7 @@ export interface JottoAgent {
 
   /** process the results of a guess */
   processResults(gr: GuessResult): void;
+
+  /** outputs information for a user to see */
+  output(message: string): void;
 }

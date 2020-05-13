@@ -25,4 +25,6 @@ export class TestAgent implements JottoAgent {
   public getSecretWord(): string {
     return this.secretWord;
   }
+
+  public output: (message: string) => void = console.log;
 }
