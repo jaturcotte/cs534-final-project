@@ -8,7 +8,8 @@
  */
 
 /* Whole Page */
-html, body {
+html,
+body {
   width: 100%;
   max-height: 100%;
   margin: 0;
@@ -19,7 +20,8 @@ html, body {
   scroll-behavior: smooth;
 }
 
-html, div {
+html,
+div {
   font-family: "Deja Vu Sans", Lato, "noto sans", sans-serif;
 }
 
@@ -55,16 +57,19 @@ div#log p {
   transition: opacity 0.2s;
 }
 
-div#previous {
+div#side-bar {
   position: absolute;
   top: 0;
   left: 600px;
-  max-height: 600px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
 }
 
-div#previous span {
+div#previous {
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  max-height: 280px;
+}
+
+div#side-bar span {
   font-family: "Liberation Mono", monospace;
 }
 
@@ -72,6 +77,26 @@ div#previous span.known-score-row {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+div#letter-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+div.letter {
+  border: 1px solid gray;
+  background-color: rgba(0, 0, 0, 0);
+  text-align: center;
+  flex-basis: 2.5em;
+  padding: 0.5em 0;
+  cursor: pointer;
+  user-select: none;
+  margin: -1px 0 0 -1px;
+}
+
+form#input-form {
+  margin-bottom: 1em;
 }
 
 /* Text */
@@ -86,13 +111,18 @@ h1.title {
   color: #eeeeee;
 }
 
-main h1, main h2, main h3, main h4, main h5, main h6 {
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
   font-family: "Merriweather", sans-serif;
 }
 
 a {
   color: #529bfd;
-  transition: color .2s;
+  transition: color 0.2s;
   text-decoration-line: underline;
 }
 
@@ -104,7 +134,8 @@ sup a {
   text-decoration: none;
 }
 
-.code, code {
+.code,
+code {
   font-family: "Liberation Mono", monospace;
   background-color: #2b2b2b;
   padding: 1px 3px;
@@ -113,7 +144,8 @@ sup a {
   overflow-x: auto;
 }
 
-div.code, code.block {
+div.code,
+code.block {
   padding: 15px 10px 15px 15px;
   border-radius: 0 5px 5px 0;
   border-left: 4px solid #f1a208;
@@ -131,7 +163,8 @@ p.quote {
   color: #8899aa;
 }
 
-p.quote.block, figure p.quote.block {
+p.quote.block,
+figure p.quote.block {
   text-align: left;
   font-size: 1em;
   padding-left: 1em;
@@ -144,8 +177,12 @@ figure p.quote {
   text-align: center;
 }
 
-p.quote::before { content: "“" }
-p.quote::after { content: "”" }
+p.quote::before {
+  content: "“";
+}
+p.quote::after {
+  content: "”";
+}
 
 /* Tables */
 main table {
@@ -153,19 +190,20 @@ main table {
   box-sizing: border-box;
 }
 
-main table td, main table th {
-  padding: 2px .75em 2px;
+main table td,
+main table th {
+  padding: 2px 0.75em 2px;
   text-align: left;
 }
 
-main table th.r, main table td.r {
+main table th.r,
+main table td.r {
   text-align: right;
 }
 
 main table thead.header th {
   border-bottom: 1px solid #bbccdd;
 }
-
 
 /* Figures */
 figure {
@@ -193,10 +231,10 @@ figure.full-width {
 }
 
 figcaption {
-  font-size: .875em;
+  font-size: 0.875em;
   text-align: center;
   color: #99aabb;
-  margin-top: .25em;
+  margin-top: 0.25em;
 }
 
 video {
@@ -223,33 +261,40 @@ button.medium {
   width: 6em;
 }
 
-button, .button-like {
+button,
+.button-like {
   font-size: 1.125em;
   color: #eee;
   background-color: #3066be;
   padding: 10px;
   border: none;
   box-shadow: 5px 5px rgba(0, 0, 0, 1);
-  transition: background-color .2s, box-shadow .2s;
+  transition: background-color 0.2s, box-shadow 0.2s;
   margin: 5px;
   border-radius: 4px;
 }
 
-button[disabled], .button-like[disabled], 
-    .long-buttons a:hover button[disabled], button[disabled]:hover,
-    .button-like[disabled]:hover {
+button[disabled],
+.button-like[disabled],
+.long-buttons a:hover button[disabled],
+button[disabled]:hover,
+.button-like[disabled]:hover {
   background-color: #d2d2d2;
   text-shadow: none;
   box-shadow: none;
 }
 
-.long-buttons a:hover button, button:hover, .button-like:hover {
+.long-buttons a:hover button,
+button:hover,
+.button-like:hover {
   text-shadow: none;
   background-color: #4ea5d9;
   box-shadow: 6px 6px 10px 1px rgba(0, 0, 0, 1);
 }
 
-.long-buttons a:active button, button:active, .button-like:active {
+.long-buttons a:active button,
+button:active,
+.button-like:active {
   text-shadow: none;
   background-color: #4ea5d9;
   box-shadow: 3px 3px rgba(0, 0, 0, 1);
@@ -323,7 +368,7 @@ footer section ul.icons li {
     font-size: 2em;
   }
 
-  footer { 
+  footer {
     flex-direction: column;
   }
 
@@ -331,8 +376,9 @@ footer section ul.icons li {
     flex-direction: column;
     align-items: center;
   }
-  
-  figure.float.left, figure.float.right {
+
+  figure.float.left,
+  figure.float.right {
     width: 100%;
     margin-inline-start: 0;
     margin-inline-end: 0;
@@ -348,10 +394,13 @@ footer section ul.icons li {
     overflow-y: auto;
   }
 
-  div#previous {
+  div#side-bar {
     position: relative;
     top: 0;
     left: 0;
+  }
+
+  div#previous {
     max-height: auto;
     overflow-y: auto;
   }

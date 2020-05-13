@@ -37,11 +37,13 @@ export class WebAgent implements JottoAgent {
     this.previous.id = "previous";
     const main = document.getElementById("main-container");
     if (main === null) throw new Error("Main not found");
+    const sideBar = document.createElement("div");
+    sideBar.id = "side-bar";
     main.appendChild(this.log);
     this.form.appendChild(this.inputBox);
     this.form.appendChild(this.submitButton);
     main.appendChild(this.form);
-    main.appendChild(this.previous);
+    main.appendChild(sideBar);
   }
 
   public setUp(): Promise<string> {
@@ -49,6 +51,34 @@ export class WebAgent implements JottoAgent {
       this.output("Enter a secret 5-letter word, and I'll try to guess it");
       this.getNextWord().then((word) => {
         this.secretWord = word;
+        const sideBar = document.getElementById("side-bar");
+        if (!sideBar) throw new Error("No side bar");
+        const letterGrid = document.createElement("div");
+        letterGrid.id = "letter-grid";
+        sideBar.appendChild(letterGrid);
+        for (const l of "abcdefghijklmnopqrstuvwxyz") {
+          const d = document.createElement("div");
+          d.classList.add("letter");
+          d.innerText = l;
+          d.addEventListener("click", () => {
+            if (d.style.backgroundColor === "") {
+              d.style.backgroundColor = "rgba(48, 102, 190, 1)";
+              d.style.color = "white";
+            } else if (d.style.backgroundColor === "rgb(48, 102, 190)") {
+              d.style.backgroundColor = "gray";
+              d.style.color = "black";
+            } else {
+              d.style.backgroundColor = "";
+              d.style.color = "black";
+            }
+          });
+          letterGrid.appendChild(d);
+        }
+        sideBar.insertAdjacentHTML(
+          "beforeend",
+          `<h3>Your Word:</h3> ` + `<span>${this.secretWord}</span>`
+        );
+        sideBar.appendChild(this.previous);
         this.updatePrevious();
         resolve(word);
       });
@@ -111,9 +141,8 @@ export class WebAgent implements JottoAgent {
   }
 
   private updatePrevious(): void {
-    this.previous.innerHTML =
-      `<h3>Your Word:</h3> <span>${this.secretWord}</span>` +
-      `<br><h3>Known Scores:</h3>`;
+    if (Object.keys(this.knownScores).length < 1) return;
+    this.previous.innerHTML = `<h3>Known Scores:</h3>`;
     for (const k in this.knownScores) {
       const s = document.createElement("span");
       s.classList.add("known-score-row");
