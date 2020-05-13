@@ -99,6 +99,16 @@ form#input-form {
   margin-bottom: 1em;
 }
 
+div#credits, div#credits a {
+  text-align: center;
+  width: 100%;
+  color: #ddd;
+}
+
+div#credits a:hover {
+  color: #529bfd;
+}
+
 /* Text */
 h1.title {
   font-family: "Montserrat", Lato, "Noto Sans", sans-serif;
